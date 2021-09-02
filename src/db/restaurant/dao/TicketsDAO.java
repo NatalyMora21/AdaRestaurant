@@ -25,5 +25,14 @@ public class TicketsDAO {
 		stmt.executeUpdate();
 
 	}
+	
+	public static void consultarTicket(Ticket ticket, Connection connection) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("SELECT * FROM TICKET INNER JOIN PEDIDO ON TICKET.ID= PEDIDO.ID INNER JOIN PLATO ON PEDIDO.ID_PLATO= PLATO.ID WHERE TICKET.ID=?");
+		stmt.setInt(1, ticket.getId());
+		stmt.executeUpdate();
+		
+	}
+	
+	
 
 }
