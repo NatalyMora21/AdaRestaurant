@@ -1,6 +1,5 @@
 package db.restaurant.model;
 
-import java.util.Date;
 
 public class Pedido {
 	
