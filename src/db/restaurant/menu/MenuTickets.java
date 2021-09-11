@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import db.restaurant.AppRestaurant;
 import db.restaurant.dao.PedidoDAO;
 import db.restaurant.dao.TicketsDAO;
 import db.restaurant.model.Pedido;
@@ -14,15 +15,7 @@ import db.restaurant.model.Ticket;
 
 public class MenuTickets {
 	
-	public static void menuTicket(Scanner sc, Connection connection) throws SQLException {
-		//1. Menu Crear Ticket
-		generarTicket(sc,connection) ;
-		//2. Ver todas las facturas
-		//allTickets(sc,connection);
-		
-		//3. Eliminar Facturas
-	}
-	
+
 	private static int generarTicket(Scanner sc, Connection connection) throws SQLException {
 		//Generar Ticket
 		System.out.println("1. Ingrese el número de mesa");
@@ -37,7 +30,6 @@ public class MenuTickets {
 	private static void agregarPlatosTicket(Scanner sc, Connection connection, int idticket) throws SQLException {
 		//Generar Ticket
 		System.out.println("--Lista de platos--");
-		//Agregar platos al ticket ir a menu 
 		MenuPlatos.listadoPlatos(connection);
 		
 		System.out.println("--Ingrese al número del plato, para terminar, marque 0--");
@@ -93,5 +85,63 @@ public class MenuTickets {
 		}
 		
 	}
+	
+	//Menú de opciones: 
+	
+	
+	//1: Marque 1 para comenzar ticket : llamar al Dao de creacion de ticket 
+	
+	
+	// Muestra el menú de platos 
+	
+	//Agregar platos (Seleccionar platos, para salir marque 0)
+	
+	//Hacer la consulta al ticket para que traiga todos los precios 
+	
+	//Actualizar el ticket con el precio 
+	
+	//Mostrar ticket
+	
+	public static void submenuCategorias(Scanner sc, Connection connection) throws SQLException {
+		int opcion = menuCategoria(sc, connection);
+		while (opcion != 0) {
+			switch (opcion) {
+			case 1:
+				generarTicket(sc, connection);
+				break;
+			case 2:
+				allTickets(connection);
+				break;
+			case 3:
+				System.out.println("Ingrese el número del ticket");
+				int id = sc.nextInt();
+				mostrarticketById(id, connection);
+				break;
+			}
+
+			opcion = menuCategoria(sc, connection);
+		}
+		
+		if (opcion==0) {
+			AppRestaurant.menu(sc);
+		}
+	}
+	
+	
+	
+	private static int menuCategoria(Scanner sc, Connection connection) {
+		System.out.println("---Menu Ticket---");
+		System.out.println();
+		System.out.println("1. Alta");
+		System.out.println("2. Listado");
+		System.out.println("3. Buscar Tciket");
+		System.out.println("0. Salir");
+		System.out.println();
+		System.out.println("Ingrese opcion: ");
+
+		return sc.nextInt();
+
+	}
+	
 
 }
