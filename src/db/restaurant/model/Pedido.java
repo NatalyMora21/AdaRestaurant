@@ -16,6 +16,13 @@ public class Pedido {
 		this.no_plato= no_plato;
 		
 	}
+	
+	public Pedido(int no_ticket , int no_plato) {
+		
+		this.no_ticket= no_ticket;
+		this.no_plato= no_plato;
+		
+	}
 
 
 	public int getId() {

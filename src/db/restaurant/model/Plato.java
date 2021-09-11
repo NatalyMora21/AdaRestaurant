@@ -15,6 +15,8 @@ public class Plato {
 		
 		
 	}
+	
+	public Plato () {}
 
 	public int getId() {
 		return id;

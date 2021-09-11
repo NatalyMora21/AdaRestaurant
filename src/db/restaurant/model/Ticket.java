@@ -9,11 +9,13 @@ public class Ticket {
 	private Date fecha;
 	private double valorTotal;
 	
+	public Ticket() {
+		// TODO Auto-generated constructor stub
+	}
 
-
-	public Ticket(int nomesa, Date fecha) {
+	public Ticket(int nomesa) {
 		this.mesa = nomesa;
-		this.fecha= fecha;
+		this.fecha= new Date();
 	}
 	
 	public Ticket(int id, double valorTotal) {
