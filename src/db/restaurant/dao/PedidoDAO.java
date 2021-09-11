@@ -12,6 +12,8 @@ public class PedidoDAO {
 	
 	//Crear pedido
 	public static void agregarPlato(Pedido pedido, Connection connection) throws SQLException {
+		
+		System.out.println("Ingreso");
 		PreparedStatement stmt = connection.prepareStatement("INSERT INTO PEDIDO (ID_NO_TICKET,  ID_NO_PLATO) VALUES(?,?)");
 		stmt.setInt(1, pedido.getNo_ticket());
 		stmt.setInt(2, pedido.getNo_plato());

@@ -64,10 +64,8 @@ public class MenuTickets {
 		}
 
 		System.out.println("--TOTAL");
-		//double total = totalFactura()
-		//Ticket ticket = new Ticket(ticket,total)
-		//agregarTotal(ticket,connection);
-		
+		TicketsDAO.totalFactura(connection, ticket);
+
 	}
 	
 	public static void allTickets(Connection connection) throws SQLException {
@@ -86,24 +84,8 @@ public class MenuTickets {
 		
 	}
 	
-	//Menú de opciones: 
-	
-	
-	//1: Marque 1 para comenzar ticket : llamar al Dao de creacion de ticket 
-	
-	
-	// Muestra el menú de platos 
-	
-	//Agregar platos (Seleccionar platos, para salir marque 0)
-	
-	//Hacer la consulta al ticket para que traiga todos los precios 
-	
-	//Actualizar el ticket con el precio 
-	
-	//Mostrar ticket
-	
-	public static void submenuCategorias(Scanner sc, Connection connection) throws SQLException {
-		int opcion = menuCategoria(sc, connection);
+	public static void submenuTickets(Scanner sc, Connection connection) throws SQLException {
+		int opcion = menuTickets(sc, connection);
 		while (opcion != 0) {
 			switch (opcion) {
 			case 1:
@@ -119,7 +101,7 @@ public class MenuTickets {
 				break;
 			}
 
-			opcion = menuCategoria(sc, connection);
+			opcion = menuTickets(sc, connection);
 		}
 		
 		if (opcion==0) {
@@ -129,7 +111,7 @@ public class MenuTickets {
 	
 	
 	
-	private static int menuCategoria(Scanner sc, Connection connection) {
+	private static int menuTickets(Scanner sc, Connection connection) {
 		System.out.println("---Menu Ticket---");
 		System.out.println();
 		System.out.println("1. Alta");

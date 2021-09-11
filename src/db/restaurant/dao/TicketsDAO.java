@@ -19,7 +19,6 @@ public class TicketsDAO {
 		stmt.setInt(1, ticket.getMesa());
 		//stmt.setDate(2, (Date) ticket.getFecha());
 		stmt.executeUpdate();
-		
 		PreparedStatement query = connection.prepareStatement("SELECT ID FROM TICKET ORDER BY ID DESC");
 		ResultSet res = query.executeQuery();
 		
@@ -41,7 +40,6 @@ public class TicketsDAO {
 		
 		Plato plato = new Plato();
 		while (res.next()) {
-			
 			System.out.print(res.getString("descripcion"));
 			plato = new Plato();
 			plato.setDescripcion(res.getString("descripcion"));
@@ -55,24 +53,27 @@ public class TicketsDAO {
 	}
 	
 	public static List<Ticket> allTickets(Connection connection) throws SQLException {
-		PreparedStatement stmt = connection.prepareStatement("select *  FROM TICKETS");
+		PreparedStatement stmt = connection.prepareStatement("select *  FROM TICKET");
 		List<Ticket> tickets = new ArrayList<Ticket>();
 		ResultSet res = stmt.executeQuery();
 		Ticket ticket = null;
 		while (res.next()) {
 			ticket = new Ticket();
 			ticket.setId(res.getInt("id"));
-			ticket.setMesa(res.getInt("mesa"));
+			ticket.setMesa(res.getInt("numero_mesa"));
 			ticket.setValorTotal(res.getDouble("total"));
 			tickets.add(ticket);
 		}
 		return tickets;
 	}
 	
-	/*public static double totalFactura() {
-	
-	
-	}*/
+	public static void totalFactura(Connection connection, int id) throws SQLException {
+		PreparedStatement stmt = connection.prepareStatement("SELECT SUM(PLATO.PRECIO) FROM PEDIDO INNER JOIN PLATO ON PEDIDO.ID_NO_PLATO= PLATO.ID WHERE PEDIDO.ID_NO_TICKET=?");
+		stmt.setInt(1, id);
+		ResultSet res = stmt.executeQuery();
+		System.out.print(res.getDouble("precio"));
+		
+	}
 	
 	public static void agregarTotal(Ticket ticket,Connection connection) throws SQLException {
 		
